@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Stream Countdown</title>
+		
+		<style>
+			html, body {
+				height: 100%;
+			}
+			body {
+				margin: 0px;
+				padding: 0px;
+				background: black;
+				background-size: cover;
+				overflow:hidden;
+				font-family: 'Open Sans', sans-serif;
+				color: white;
+				text-shadow: 0 0 6px black;
+			}
+			a {
+				color: white;
+				text-decoration: none;
+			}
+			@keyframes fadeIn {
+				from { opacity: 0; }
+				to { opacity: 1; }
+			}
+			.information {
+				height: 100%;
+				display: flex;
+				text-align: center;
+				align-items: center;
+				justify-content: center;
+				animation: fadeIn 2s;
+				white-space: nowrap;
+			}
+			.information .section {
+				color: white;
+				font-family: 'Inconsolata', monospace;
+				font-size: 10pt;
+				text-align: center;
+				padding: 0px 8px 0px 8px;
+				display: inline-block;
+			}
+			.information .section .content {
+				color: white;
+				font-family: 'Dosis', monospace;
+				font-size: 42pt;
+				text-align: center;
+			}
+			.twitch .icon {
+				background-repeat:no-repeat;
+				background-image:url('./Glitch_White_RGB.svg');
+				width: 28px;
+				height: 28px;
+				display: inline-block;
+				margin-bottom: -8px;
+			}
+			.twitch {
+				height: 24px;
+				margin: 0 auto;
+
+				color: white;
+				font-family: 'Dosis', monospace;
+				font-size: 16pt;
+			}
+			canvas {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0px;
+				left: 0px;
+				z-index: -1;
+				animation-delay: 2s;
+				animation: fadeIn 8s;
+			}
+		</style>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+		<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+		<script
+			src="https://code.jquery.com/jquery-3.1.1.min.js"
+			integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+			crossorigin="anonymous">
+		</script>
+	</head>
+	<body>
+		<canvas id="renderer" width="1024" height="512"></canvas>
+
+		<div class="information">
+			<div>
+				<a href="https://www.twitch.tv/ferrisstreamsstuff"><div class="twitch"><div class="icon"></div>/ferrisstreamsstuff</div></a>
+				
+				<div class="section">
+					<div class="content" id="d">0</div>
+					<div id="dbin">[00000000]</div>
+				</div>
+				<div class="section">
+					<div class="content" id="h">0</div>
+					<div id="hbin">[00000000]</div>
+				</div>
+				<div class="section">
+					<div class="content" id="m">0</div>
+					<div id="mbin">[00000000]</div>
+				</div>
+				<div class="section">
+					<div class="content" id="s">0</div>
+					<div id="sbin">[00000000]</div>
+				</div>
+			</div>
+		</div>
+		<script src="./fancy.js"></script>
+	</body>
+</html>
+
+
