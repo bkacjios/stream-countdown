@@ -341,7 +341,7 @@ countdown.checkOnline = function(now) {
 
 	$.ajax({
 		type: 'GET',
-		url: 'https://api.twitch.tv/kraken/channels/' + settings.stream.channel,
+		url: 'https://api.twitch.tv/kraken/streams/' + settings.stream.channel,
 		headers: {
 			'Client-ID': 'p59zoqvt4joe9gqzqbs5cycbhc3nr6'
 		},
