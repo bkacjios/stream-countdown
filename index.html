@@ -27,14 +27,12 @@
 				from { opacity: 0; }
 				to { opacity: 1; }
 			}
-			.information {
+			.page {
+				margin-left: auto;
+				margin-right: auto;
+				width: 65%;
 				height: 100%;
-				display: flex;
-				text-align: center;
-				align-items: center;
-				justify-content: center;
 				animation: fadeIn 2s;
-				white-space: nowrap;
 
 				cursor:default;
 
@@ -45,6 +43,52 @@
 				      -ms-user-select: none; /* Internet Explorer/Edge */
 				          user-select: none; /* Non-prefixed version, currently
 												supported by Chrome and Opera */
+			}
+
+			.navbar {
+				margin-top: 32px;
+			}
+			.navbar .icon {
+				background-repeat: no-repeat;
+				background-origin: content-box;
+				width: 32px;
+				height: 32px;
+				padding: 4px;
+				display: inline-block;
+			}
+			.navbar .github {
+				background-image: url('./github.svg');
+			}
+
+			.navbar .twitter {
+				background-image: url('./twitter.svg');
+			}
+
+			.navbar .youtube {
+				background-image: url('./youtube.svg');
+			}
+
+			.navbar .patreon {
+				background-image: url('./patreon.svg');
+			}
+
+			.navbar .reddit {
+				background-image: url('./reddit.svg');
+			}
+
+			.information {
+				display: flex;
+
+				height: 100%;
+
+				text-align: center;
+
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+				white-space: nowrap;
+
+				margin-top: -64px;
 			}
 			.information .section {
 				color: white;
@@ -60,22 +104,24 @@
 				font-size: 42pt;
 				text-align: center;
 			}
-			.twitch .icon {
-				background-repeat:no-repeat;
-				background-image:url('./Glitch_White_RGB.svg');
-				width: 28px;
-				height: 28px;
-				display: inline-block;
-				margin-bottom: -8px;
-			}
+
 			.twitch {
-				height: 24px;
+				height: 32px;
 				margin: 0 auto;
 
 				color: white;
 				font-family: 'Dosis', monospace;
 				font-size: 16pt;
 			}
+			.twitch .icon {
+				background-repeat:no-repeat;
+				background-image:url('./twitch.svg');
+				width: 32px;
+				height: 32px;
+				display: inline-block;
+				margin-bottom: -10px;
+			}
+			
 			canvas {
 				position: absolute;
 				width: 100%;
@@ -98,27 +144,39 @@
 	<body>
 		<canvas id="renderer" width="1024" height="512"></canvas>
 
-		<div class="information">
-			<div>
-				<a href="https://www.twitch.tv/ferrisstreamsstuff"><div class="twitch"><div class="icon"></div>/ferrisstreamsstuff</div></a>
-				
-				<div class="section">
-					<div class="content" id="d">0</div>
-					<div id="dbin">[00000000]</div>
-				</div>
-				<div class="section">
-					<div class="content" id="h">0</div>
-					<div id="hbin">[00000000]</div>
-				</div>
-				<div class="section">
-					<div class="content" id="m">0</div>
-					<div id="mbin">[00000000]</div>
-				</div>
-				<div class="section">
-					<div class="content" id="s">0</div>
-					<div id="sbin">[00000000]</div>
+		<div class="page">
+
+			<div class="navbar">
+				<a href="https://github.com/yupferris"><div class="icon github"></div></a>
+				<a href="https://twitter.com/ferristweetsnow"><div class="icon twitter"></div></a>
+				<a href="https://www.youtube.com/channel/UC4mpLlHn0FOekNg05yCnkzQ"><div class="icon youtube"></div></a>
+				<a href="https://www.patreon.com/ferrisstreamsstuff"><div class="icon patreon"></div></a>
+				<a href="https://www.reddit.com/user/yupferris/"><div class="icon reddit"></div></a>
+			</div>
+
+			<div class="information">
+				<div>
+					<a href="https://www.twitch.tv/ferrisstreamsstuff"><div class="twitch"><div class="icon"></div>/ferrisstreamsstuff</div></a>
+					
+					<div class="section">
+						<div class="content" id="d">0</div>
+						<div id="dbin">[00000000]</div>
+					</div>
+					<div class="section">
+						<div class="content" id="h">0</div>
+						<div id="hbin">[00000000]</div>
+					</div>
+					<div class="section">
+						<div class="content" id="m">0</div>
+						<div id="mbin">[00000000]</div>
+					</div>
+					<div class="section">
+						<div class="content" id="s">0</div>
+						<div id="sbin">[00000000]</div>
+					</div>
 				</div>
 			</div>
+
 		</div>
 		<script src="./fancy.js"></script>
 	</body>
