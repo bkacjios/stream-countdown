@@ -14,7 +14,6 @@
 				padding: 0px;
 				background: black;
 				background-size: cover;
-				overflow:hidden;
 				font-family: 'Open Sans', sans-serif;
 				color: white;
 				text-shadow: 0 0 6px black;
@@ -23,6 +22,27 @@
 				color: white;
 				text-decoration: none;
 			}
+
+			@keyframes twitchPulse {
+				from {
+					color: white;
+					text-shadow: 0 0 0px #6441A4;
+				}
+				50% {
+					color: #6441A4;
+					text-shadow: 0 0 18px #6441A4;
+				}
+				to {
+					color: white;
+					text-shadow: 0 0 0px #6441A4;
+				}
+			}
+			.live {
+				animation-name: twitchPulse;
+				animation-duration: 2s;
+				animation-iteration-count: infinite;
+			}
+
 			@keyframes fadeIn {
 				from { opacity: 0; }
 				to { opacity: 1; }
@@ -30,6 +50,10 @@
 			.page {
 				margin-left: auto;
 				margin-right: auto;
+
+				min-width: 350px;
+				min-height: 350px;
+
 				width: 65%;
 				height: 100%;
 				animation: fadeIn 2s;
@@ -46,7 +70,7 @@
 			}
 
 			.navbar {
-				margin-top: 32px;
+				padding-top: 32px;
 			}
 			.navbar .icon {
 				background-repeat: no-repeat;
@@ -55,25 +79,59 @@
 				height: 32px;
 				padding: 4px;
 				display: inline-block;
+				transition: all .1s ease-in-out;
 			}
+
+			.navbar .icon:hover {
+				transform: scale(1.2);
+			}
+
+			.navbar .twitch {
+				background-image: url('./twitch.svg');
+			}
+
+			.navbar .twitch:hover {
+				filter: drop-shadow( 0px 0px 8px #6441a5 );
+			}
+
 			.navbar .github {
 				background-image: url('./github.svg');
+			}
+
+			.navbar .github:hover {
+				filter: drop-shadow( 0px 0px 8px #6cc644 );
 			}
 
 			.navbar .twitter {
 				background-image: url('./twitter.svg');
 			}
 
+			.navbar .twitter:hover {
+				filter: drop-shadow( 0px 0px 8px #1da1f2 );
+			}
+
 			.navbar .youtube {
 				background-image: url('./youtube.svg');
+			}
+
+			.navbar .youtube:hover {
+				filter: drop-shadow( 0px 0px 8px #cd201f );
 			}
 
 			.navbar .patreon {
 				background-image: url('./patreon.svg');
 			}
 
+			.navbar .patreon:hover {
+				filter: drop-shadow( 0px 0px 8px #e6461a );
+			}
+
 			.navbar .reddit {
 				background-image: url('./reddit.svg');
+			}
+
+			.navbar .reddit:hover {
+				filter: drop-shadow( 0px 0px 8px #cee3f8 );
 			}
 
 			.information {
@@ -105,15 +163,15 @@
 				text-align: center;
 			}
 
-			.twitch {
+			.stream {
 				height: 32px;
 				margin: 0 auto;
 
 				color: white;
 				font-family: 'Dosis', monospace;
-				font-size: 16pt;
+				font-size: 18pt;
 			}
-			.twitch .icon {
+			.stream .icon {
 				background-repeat:no-repeat;
 				background-image:url('./twitch.svg');
 				width: 32px;
@@ -147,16 +205,17 @@
 		<div class="page">
 
 			<div class="navbar">
-				<a href="https://github.com/yupferris"><div class="icon github"></div></a>
-				<a href="https://twitter.com/ferristweetsnow"><div class="icon twitter"></div></a>
 				<a href="https://www.youtube.com/channel/UC4mpLlHn0FOekNg05yCnkzQ"><div class="icon youtube"></div></a>
 				<a href="https://www.patreon.com/ferrisstreamsstuff"><div class="icon patreon"></div></a>
+				<a href="https://github.com/yupferris"><div class="icon github"></div></a>
+				<a href="https://twitter.com/ferristweetsnow"><div class="icon twitter"></div></a>
+				<a href="https://www.twitch.tv/ferrisstreamsstuff"><div class="icon twitch"></div></a>
 				<a href="https://www.reddit.com/user/yupferris/"><div class="icon reddit"></div></a>
 			</div>
 
 			<div class="information">
 				<div>
-					<a href="https://www.twitch.tv/ferrisstreamsstuff"><div class="twitch"><div class="icon"></div>/ferrisstreamsstuff</div></a>
+					<a href="https://www.twitch.tv/ferrisstreamsstuff"><div class="stream"><div class="icon"></div>/ferrisstreamsstuff</div></a>
 					
 					<div class="section">
 						<div class="content" id="d">0</div>

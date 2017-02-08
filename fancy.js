@@ -13,6 +13,7 @@ var settings = {
 		minute: 0,
 	},
 	DEBUG : false,
+	DEBUG_LIVE : false,
 	// Average FPS of last X frames
 	DEBUG_FPS : 120,
 }
@@ -347,7 +348,27 @@ countdown.checkOnline = function(now) {
 		},
 		success: function(data) {
 			// If stream data, then we are live!
-			countdown.live = data.stream != null;
+			var live = data.stream != null;
+
+			if (settings.DEBUG_LIVE) {
+				live = true;
+			}
+
+			if (countdown.live != live) {
+				countdown.live = live;
+
+				if (live) {
+					countdown.daysElmnt.classList.add("live");
+					countdown.hourElmnt.classList.add("live");
+					countdown.minsElmnt.classList.add("live");
+					countdown.secsElmnt.classList.add("live");
+				} else {
+					countdown.daysElmnt.classList.remove("live");
+					countdown.hourElmnt.classList.remove("live");
+					countdown.minsElmnt.classList.remove("live");
+					countdown.secsElmnt.classList.remove("live");
+				}
+			}
 		}
 	});
 }
