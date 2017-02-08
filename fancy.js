@@ -28,6 +28,7 @@ var render = {
 	height : 1024,
 	canvas : document.getElementById('renderer'),
 	delta : 1/60,
+	line : 100,
 };
 
 render.ctx = render.canvas.getContext('2d');
@@ -78,8 +79,8 @@ window.onresize = function resize() {
 
 	// Adjust all the particles to stay within the window by scaling their X and Y axis
 	for (var i = 0, p; p = render.particles[i]; i++) {
-		p.x = p.x * dw;
-		p.y = p.y * dh;
+		p.x *= dw;
+		p.y *= dh;
 	}
 }
 
@@ -139,7 +140,7 @@ render.draw = function(ctx) {
 	ctx.fillStyle = "white";
 
 	// Around 100 pixels for connecting lines.. Scales with resolution
-	var line = 100 * render.scale;
+	this.line = 100 * render.scale;
 
 	for (var i = 0, p1; p1 = this.particles[i]; i++) {
 		
@@ -166,12 +167,12 @@ render.draw = function(ctx) {
 			if (!render.linked[p1.id])
 				render.linked[p1.id] = [];
 
-			if (dist <= line) {
+			if (dist <= this.line) {
 				// Mark the particles as linked when they are close enough
 				render.linked[p1.id][p2.id] = true;
 
 				// Distance as a percent
-				var per = 1-(dist/line);
+				var per = 1-(dist/this.line);
 
 				// Once the particle is the maximum distance away, 0 width!
 				ctx.lineWidth = Math.min(p1.radius, p2.radius) * per;
@@ -395,19 +396,18 @@ countdown.draw = function(now) {
 	var end = this.nextStream();
 	var seconds = end - now;
 
-	var days = Math.floor(seconds/86400);
-	var daysRemain = seconds%86400;
-	var hours = Math.floor(daysRemain/3600);
-	var hourRemain = (seconds - 86400)%3600;
-	var min = Math.floor(hourRemain/60);
-	var sec = Math.floor(seconds%60);
+	var days = Math.floor(seconds / 86400);
+	var remainder = seconds % 86400;
+	var hours = Math.floor(remainder / 3600);
+	var mins = Math.floor((remainder % 3600) / 60);
+	var secs = Math.floor((remainder % 3600) % 60);
 
 	// If the stream is live, show L I V E in place of numbers
 	if (this.live) {
 		days = 'L';
 		hours = 'I';
-		min = 'V';
-		sec = 'E';
+		mins = 'V';
+		secs = 'E';
 	}
 
 	// Day number needs an update..
@@ -429,19 +429,19 @@ countdown.draw = function(now) {
 
 	this.renderBinary(this.hourBin, hours, "hours")
 
-	if (this.minsElmnt.innerHTML != min) {
-		this.minsElmnt.innerHTML = min;
+	if (this.minsElmnt.innerHTML != mins) {
+		this.minsElmnt.innerHTML = mins;
 		this.updates.minutes = now;
 	}
 
-	this.renderBinary(this.minsBin, min, "minutes")
+	this.renderBinary(this.minsBin, mins, "minutes")
 
-	if (this.secsElmnt.innerHTML != sec) {
-		this.secsElmnt.innerHTML = sec;
+	if (this.secsElmnt.innerHTML != secs) {
+		this.secsElmnt.innerHTML = secs;
 		this.updates.seconds = now;
 	}
 
-	this.renderBinary(this.secsBin, sec, "seconds")
+	this.renderBinary(this.secsBin, secs, "seconds")
 }
 
 render.now = render.getTime();
