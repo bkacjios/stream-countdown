@@ -66,8 +66,8 @@ window.requestAnimFrame = (function(){
 })();
 
 window.onresize = function resize() {
-	var dw = window.innerWidth - render.width;
-	var dh = window.innerHeight - render.height;
+	var dw = window.innerWidth / render.width;
+	var dh = window.innerHeight / render.height;
 
 	// Resize the canvas to fit the screen
 	render.width = render.canvas.width = window.innerWidth;
@@ -78,8 +78,8 @@ window.onresize = function resize() {
 
 	// Adjust all the particles to stay within the window by scaling their X and Y axis
 	for (var i = 0, p; p = render.particles[i]; i++) {
-		p.x += (p.x/window.innerWidth) * dw;
-		p.y += (p.y/window.innerHeight) * dh;
+		p.x = p.x * dw;
+		p.y = p.y * dh;
 	}
 }
 
