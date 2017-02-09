@@ -380,7 +380,7 @@ countdown.nextStream = function() {
 	var next = new Date();
 
 	// Calculate the amount of days left before the stream day..
-	next.setUTCDate(next.getUTCDate() + (settings.stream.day - 1 - next.getUTCDay() + 7) % 7 + 1);
+	next.setUTCDate(next.getUTCDate() + (settings.stream.day - next.getUTCDay() + 7) % 7);
 
 	// Set the time of day we stream
 	next.setUTCHours(settings.stream.hour + settings.stream.timezone);
