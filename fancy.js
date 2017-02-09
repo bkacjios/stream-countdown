@@ -43,6 +43,7 @@ var countdown = {
 		minutes : 0,
 		seconds : 0,
 	},
+	end : 0,
 };
 
 Math.clamp = function(a,b,c){
@@ -377,24 +378,35 @@ countdown.checkOnline = function(now) {
 countdown.nextStream = function() {
 	// Use UTC time as a base so the timer is correct for everyone
 
-	var next = new Date();
+	var date = new Date();
+
+	var weekDay = date.getUTCDay();
+	var next = 0;
+
+	var streamHour = settings.stream.hour + settings.stream.timezone;
+
+	if (weekDay >= 4 && date.getUTCHours() >= streamHour && date.getUTCMinutes() >= settings.stream.minute)
+		next = 7;
 
 	// Calculate the amount of days left before the stream day..
-	next.setUTCDate(next.getUTCDate() + (settings.stream.day - next.getUTCDay() + 7) % 7);
+	date.setUTCDate(date.getUTCDate() + (settings.stream.day - weekDay) + next);
 
 	// Set the time of day we stream
-	next.setUTCHours(settings.stream.hour + settings.stream.timezone);
-	next.setUTCMinutes(settings.stream.minute);
-	next.setUTCSeconds(0);
-	next.setUTCMilliseconds(0);
+	date.setUTCHours(streamHour);
+	date.setUTCMinutes(settings.stream.minute);
+	date.setUTCSeconds(0);
+	date.setUTCMilliseconds(0);
 
 	// Convert to seconds
-	return next.getTime()/1000;
+	return date.getTime()/1000;
 }
 
 countdown.draw = function(now) {
-	var end = this.nextStream();
-	var seconds = end - now;
+
+	if (countdown.end <= now)
+		countdown.end = this.nextStream();
+
+	var seconds = countdown.end - now;
 
 	var days = Math.floor(seconds / 86400);
 	var remainder = seconds % 86400;
